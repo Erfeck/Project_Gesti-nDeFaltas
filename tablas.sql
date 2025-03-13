@@ -1,0 +1,26 @@
+CREATE TABLE IF NOT EXISTS usuario (
+id INTEGER PRIMARY KEY, 
+nombre_usuario TEXT NOT NULL UNIQUE
+);
+--
+CREATE TABLE IF NOT EXISTS curso (
+id INTEGER PRIMARY KEY , 
+nombre_curso TEXT NOT NULL,
+id_usuario INTEGER REFERENCES usuario (id) ON DELETE CASCADE
+);
+--
+CREATE TABLE IF NOT EXISTS asignatura (
+id INTEGER PRIMARY KEY,
+nombre_asignatura TEXT NOT NULL,
+faltas_totales INTEGER,
+id_curso INTEGER REFERENCES curso (id) ON DELETE CASCADE
+);
+--
+CREATE TABLE IF NOT EXISTS falta (
+id INTEGER PRIMARY KEY,
+horas_faltadas INTEGER NOT NULL,
+motivo TEXT NOT NULL,
+cuenta_como_falta TEXT NOT NULL, 
+fecha_falta TEXT NOT NULL,
+id_asignatura INTEGER REFERENCES asignatura (id) ON DELETE CASCADE
+);
